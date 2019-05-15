@@ -1,4 +1,4 @@
-name: pymol
+name: pymol-oss
 version: '2.3.0'
 base: core18
 summary: PyMOL is a molecular visualization system.
