@@ -1,0 +1,3 @@
+#!/bin/sh
+export PYMOL_PATH="/snap/pymol/current/usr/share/pymol"
+"/snap/pymol/current/usr/bin/python3" "/snap/pymol/current/usr/lib/python/pymol/__init__.py" "$@"

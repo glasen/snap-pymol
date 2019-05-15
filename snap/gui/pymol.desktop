@@ -1,0 +1,19 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=PyMOL Molecular Graphics System
+Name[pl]=PyMOL, graficzny modeler cząsteczek
+Name[ru]=Система молекулярной графики PyMOL
+GenericName=Molecular Modeller
+GenericName[pl]=Modeler cząsteczek
+GenericName[ru]=Редактор моделей молекул
+Comment=Model molecular structures and produce high-quality images of them
+Comment[pl]=Program do tworzenia i wizualizowania modeli cząsteczek
+Comment[ru]=Программа для создания и визуализации моделей молекул
+TryExec=pymol
+Exec=pymol %U
+Terminal=false
+Icon=${SNAP}/meta/gui/icon.png
+MimeType=chemical/x-pdb;chemical/x-mdl-molfile;chemical/x-mol2;chemical/seq-aa-fasta;chemical/seq-na-fasta;chemical/x-xyz;chemical/x-mdl-sdf;
+Categories=Graphics;Education;Science;Chemistry;
+Keywords=molecular visualization system;molecular structures;crystallography;pdb;structural biology;biochemistry;

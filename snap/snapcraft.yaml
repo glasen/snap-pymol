@@ -1,0 +1,145 @@
+name: pymol
+version: '2.3.0'
+base: core18
+summary: PyMOL is a molecular visualization system.
+description: |
+    PyMOL is computer software, a molecular visualization system created by Warren Lyford DeLano. It is user-sponsored,
+    open-source software, released under the Python License. It was commercialized initially by DeLano Scientific LLC,
+    which was a private software company dedicated to creating useful tools that become universally accessible to
+    scientific and educational communities. It is currently commercialized by Schrödinger, Inc. PyMOL can produce
+    high-quality 3D images of small molecules and biological macromolecules, such as proteins. According to the original
+    author, by 2009, almost a quarter of all published images of 3D protein structures in the scientific literature were
+    made using PyMOL.
+
+    The commercial version is available on "https://pymol.org".
+
+    This is the Open Source version of PyMOL. The source code is availabe on GitHub:
+
+    https://github.com/schrodinger/pymol-open-source
+
+architectures: 
+  - amd64
+
+icon: snap/gui/icon.png
+
+grade: stable
+confinement: strict
+
+
+apps:
+  pymol:
+    command: desktop-launch $SNAP/usr/bin/pymol
+    environment:
+      DISABLE_WAYLAND: 1
+    plugs:
+      - desktop
+      - unity7
+      - wayland
+      - network
+      - home
+      - opengl
+      - gsettings
+
+
+plugs:
+  gtk-3-themes:
+    interface: content
+    target: $SNAP/data-dir/themes
+    default-provider: gtk-common-themes
+  icon-themes:
+    interface: content
+    target: $SNAP/data-dir/icons
+    default-provider: gtk-common-themes
+  sound-themes:
+    interface: content
+    target: $SNAP/data-dir/sounds
+    default-provider: gtk-common-themes
+
+
+parts:
+  desktop-qt5:
+    build-packages:
+    - qtbase5-dev
+    - dpkg-dev
+    make-parameters:
+    - FLAVOR=qt5
+    plugin: make
+    source: https://github.com/ubuntu/snapcraft-desktop-helpers.git
+    source-subdir: qt
+    stage-packages:
+    - libxkbcommon0
+    - ttf-ubuntu-font-family
+    - dmz-cursor-theme
+    - light-themes
+    - shared-mime-info
+    - libqt5gui5
+    - libgdk-pixbuf2.0-0
+    - libqt5svg5
+    - locales-all
+
+
+  pmw:
+    plugin: python
+    python-version: python3
+    source-type: git
+    source: https://github.com/schrodinger/pmw-patched.git
+    stage-packages:
+      - libpython3-dev
+      - python3
+    override-build:
+      python3 setup.py --no-user-cfg install
+
+
+  mmtf-cpp:
+    plugin: cmake
+    configflags: [-DCMAKE_INSTALL_PREFIX=/usr/]
+    source-type: tar
+    source: https://github.com/rcsb/mmtf-cpp/archive/v1.0.0.tar.gz
+    build-packages:
+      - build-essential
+      - libmsgpack-dev    
+
+
+  local:
+    source: local
+    plugin: dump
+    prime: [-*]
+
+
+  pymol:
+    plugin: python
+    python-version: python3
+    source-type: tar
+    source: https://github.com/schrodinger/pymol-open-source/archive/v2.3.0.tar.gz
+    build-packages: 
+      - libfreetype6-dev
+      - libglew-dev
+      - libglm-dev
+      - libmsgpack-dev
+      - libpng-dev
+      - libxml2-dev
+      - libpython3.6-dev
+      - python3-numpy
+      - python3-pyqt5
+      - python3-pyqt5.qtopengl
+    stage-packages:
+      - libglew2.0
+      - libpython3.6-dev
+      - libqt5gui5
+      - python3-numpy
+      - python3-pyqt5
+      - python3-pyqt5.qtopengl
+      - python3-tk
+      - qtwayland5
+      - qt5-gtk-platformtheme
+    
+    override-build: |
+      python3 setup.py --no-glut --use-msgpackc c++11 install --home=/snap/pymol/current/usr
+      mv /snap/pymol/current/usr/lib/python/pymol/pymol_path ${SNAPCRAFT_PART_INSTALL}/usr/share/pymol
+      cp -r /snap/pymol/current/usr ${SNAPCRAFT_PART_INSTALL}/
+
+      cp ${SNAPCRAFT_STAGE}/pymol ${SNAPCRAFT_PART_INSTALL}/usr/bin/pymol
+      chmod +x ${SNAPCRAFT_PART_INSTALL}/usr/bin/pymol
+      rm -r /snap/pymol/ ${SNAPCRAFT_PART_INSTALL}/usr/include ${SNAPCRAFT_PART_INSTALL}/usr/share/doc/ ${SNAPCRAFT_PART_INSTALL}/usr/share/applications/
+  
+    after: [pmw, mmtf-cpp, desktop-qt5, local]
