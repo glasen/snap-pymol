@@ -11,16 +11,16 @@ description: |
     author, by 2009, almost a quarter of all published images of 3D protein structures in the scientific literature were
     made using PyMOL.
 
-    The commercial version is available on "https://pymol.org".
-
     This is the Open Source version of PyMOL. The source code is availabe on GitHub:
 
     https://github.com/schrodinger/pymol-open-source
 
+    The commercial version with additional features is available on "https://pymol.org".
+
 architectures: 
   - amd64
 
-icon: snap/gui/icon.png
+icon: snap/gui/icon.svg
 
 grade: stable
 confinement: strict
@@ -28,7 +28,7 @@ confinement: strict
 
 apps:
   pymol:
-    command: desktop-launch $SNAP/usr/bin/pymol
+    command: desktop-launch $SNAP/usr/bin/pymol-oss
     environment:
       DISABLE_WAYLAND: 1
     plugs:
@@ -106,7 +106,7 @@ parts:
     prime: [-*]
 
 
-  pymol:
+  pymol-oss:
     plugin: python
     python-version: python3
     source-type: tar
@@ -134,12 +134,13 @@ parts:
       - qt5-gtk-platformtheme
     
     override-build: |
-      python3 setup.py --no-glut --use-msgpackc c++11 install --home=/snap/pymol/current/usr
-      mv /snap/pymol/current/usr/lib/python/pymol/pymol_path ${SNAPCRAFT_PART_INSTALL}/usr/share/pymol
-      cp -r /snap/pymol/current/usr ${SNAPCRAFT_PART_INSTALL}/
+      python3 setup.py --no-glut --use-msgpackc c++11 install --home=/snap/pymol-oss/current/usr
+      mv /snap/pymol-oss/current/usr/lib/python/pymol/pymol_path ${SNAPCRAFT_PART_INSTALL}/usr/share/pymol
+      cp -r /snap/pymol-oss/current/usr ${SNAPCRAFT_PART_INSTALL}/
 
-      cp ${SNAPCRAFT_STAGE}/pymol ${SNAPCRAFT_PART_INSTALL}/usr/bin/pymol
-      chmod +x ${SNAPCRAFT_PART_INSTALL}/usr/bin/pymol
-      rm -r /snap/pymol/ ${SNAPCRAFT_PART_INSTALL}/usr/include ${SNAPCRAFT_PART_INSTALL}/usr/share/doc/ ${SNAPCRAFT_PART_INSTALL}/usr/share/applications/
+      cp ${SNAPCRAFT_STAGE}/pymol-oss ${SNAPCRAFT_PART_INSTALL}/usr/bin/pymol-oss
+      rm  ${SNAPCRAFT_PART_INSTALL}/usr/bin/pymol
+      chmod +x ${SNAPCRAFT_PART_INSTALL}/usr/bin/pymol-oss
+      rm -r /snap/pymol-oss/ ${SNAPCRAFT_PART_INSTALL}/usr/include ${SNAPCRAFT_PART_INSTALL}/usr/share/doc/ ${SNAPCRAFT_PART_INSTALL}/usr/share/applications/
   
     after: [pmw, mmtf-cpp, desktop-qt5, local]
