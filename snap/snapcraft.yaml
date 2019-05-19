@@ -119,19 +119,13 @@ parts:
       - libpng-dev
       - libxml2-dev
       - libpython3.6-dev
-      - python3-numpy
-      - python3-pyqt5
-      - python3-pyqt5.qtopengl
     stage-packages:
       - libglew2.0
-      - libpython3.6-dev
       - libqt5gui5
       - python3-numpy
       - python3-pyqt5
       - python3-pyqt5.qtopengl
       - python3-tk
-      - qtwayland5
-      - qt5-gtk-platformtheme
     
     override-build: |
       python3 setup.py --no-glut --use-msgpackc c++11 install --home=/snap/pymol-oss/current/usr
