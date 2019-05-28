@@ -1,5 +1,5 @@
 name: pymol-oss
-version: '2.3.0'
+version: '2.3.2'
 base: core18
 summary: PyMOL is a molecular visualization system.
 description: |
@@ -95,8 +95,7 @@ parts:
     source-type: git
     source: https://github.com/schrodinger/pmw-patched.git
     stage-packages:
-      - libpython3-dev
-      - python3
+      - libpython3.6-dev
     override-build:
       python3 setup.py --no-user-cfg install
 
@@ -141,13 +140,14 @@ parts:
       - qt5-gtk-platformtheme
     
     override-build: |
+      patch -p1 < ${SNAPCRAFT_STAGE}/patches/2.3.2.patch
       python3 setup.py --no-glut --use-msgpackc c++11 install --home=/snap/pymol-oss/current/usr
       mv /snap/pymol-oss/current/usr/lib/python/pymol/pymol_path ${SNAPCRAFT_PART_INSTALL}/usr/share/pymol
       cp -r /snap/pymol-oss/current/usr ${SNAPCRAFT_PART_INSTALL}/
-
-      cp ${SNAPCRAFT_STAGE}/pymol-oss ${SNAPCRAFT_PART_INSTALL}/usr/bin/pymol-oss
+      cp ${SNAPCRAFT_STAGE}/launchers/pymol-oss ${SNAPCRAFT_PART_INSTALL}/usr/bin/pymol-oss
       rm  ${SNAPCRAFT_PART_INSTALL}/usr/bin/pymol
       chmod +x ${SNAPCRAFT_PART_INSTALL}/usr/bin/pymol-oss
-      rm -r /snap/pymol-oss/ ${SNAPCRAFT_PART_INSTALL}/usr/include ${SNAPCRAFT_PART_INSTALL}/usr/share/doc/ ${SNAPCRAFT_PART_INSTALL}/usr/share/applications/
+      rm -rf /snap/pymol-oss/ ${SNAPCRAFT_PART_INSTALL}/usr/include ${SNAPCRAFT_PART_INSTALL}/usr/share/doc/ ${SNAPCRAFT_PART_INSTALL}/usr/share/applications/ \
+      ${SNAPCRAFT_PART_INSTALL}/usr/share/icons ${SNAPCRAFT_PART_INSTALL}/usr/lib/python3.7 ${SNAPCRAFT_PART_INSTALL}/usr/share/doc
   
     after: [pmw, mmtf-cpp, desktop-qt5, local]
