@@ -1,6 +1,6 @@
-diff -upNr pymol-open-source-2.3.0/contrib/mmtf-c/mmtf_parser.cpp pymol-open-source-2.3.3/contrib/mmtf-c/mmtf_parser.cpp
+diff -upNr pymol-open-source-2.3.0/contrib/mmtf-c/mmtf_parser.cpp pymol-open-source-2.3.4/contrib/mmtf-c/mmtf_parser.cpp
 --- pymol-open-source-2.3.0/contrib/mmtf-c/mmtf_parser.cpp	2019-02-11 15:08:10.000000000 +0100
-+++ pymol-open-source-2.3.3/contrib/mmtf-c/mmtf_parser.cpp	2019-08-22 13:07:19.162320629 +0200
++++ pymol-open-source-2.3.4/contrib/mmtf-c/mmtf_parser.cpp	2019-11-14 20:58:07.540725401 +0100
 @@ -28,7 +28,21 @@
  #define __STDC_LIMIT_MACROS
  
@@ -173,9 +173,9 @@ diff -upNr pymol-open-source-2.3.0/contrib/mmtf-c/mmtf_parser.cpp pymol-open-sou
      MAP_ITERATE_BEGIN(object);
      FETCH_AND_ASSIGN(bio_assembly, string, name);
      FETCH_AND_ASSIGN_WITHCOUNT(bio_assembly, transformList, transformList);
-diff -upNr pymol-open-source-2.3.0/contrib/mmtf-c/mmtf_parser_private.h pymol-open-source-2.3.3/contrib/mmtf-c/mmtf_parser_private.h
+diff -upNr pymol-open-source-2.3.0/contrib/mmtf-c/mmtf_parser_private.h pymol-open-source-2.3.4/contrib/mmtf-c/mmtf_parser_private.h
 --- pymol-open-source-2.3.0/contrib/mmtf-c/mmtf_parser_private.h	2019-02-11 15:08:10.000000000 +0100
-+++ pymol-open-source-2.3.3/contrib/mmtf-c/mmtf_parser_private.h	1970-01-01 01:00:00.000000000 +0100
++++ pymol-open-source-2.3.4/contrib/mmtf-c/mmtf_parser_private.h	1970-01-01 01:00:00.000000000 +0100
 @@ -1,84 +0,0 @@
 -// *************************************************************************
 -// Copyright [2016] [RCSB]
@@ -261,9 +261,9 @@ diff -upNr pymol-open-source-2.3.0/contrib/mmtf-c/mmtf_parser_private.h pymol-op
 -#endif
 -
 -// vi:sw=4:expandtab
-diff -upNr pymol-open-source-2.3.0/layer0/Isosurf.cpp pymol-open-source-2.3.3/layer0/Isosurf.cpp
+diff -upNr pymol-open-source-2.3.0/layer0/Isosurf.cpp pymol-open-source-2.3.4/layer0/Isosurf.cpp
 --- pymol-open-source-2.3.0/layer0/Isosurf.cpp	2019-02-11 15:08:10.000000000 +0100
-+++ pymol-open-source-2.3.3/layer0/Isosurf.cpp	2019-08-22 13:04:51.315967452 +0200
++++ pymol-open-source-2.3.4/layer0/Isosurf.cpp	2019-11-14 20:58:07.540725401 +0100
 @@ -83,8 +83,6 @@ static int IsosurfAlloc(PyMOLGlobals * G
  static void IsosurfPurge(CIsosurf * II);
  static int IsosurfCurrent(CIsosurf * II);
@@ -284,9 +284,9 @@ diff -upNr pymol-open-source-2.3.0/layer0/Isosurf.cpp pymol-open-source-2.3.3/la
  static void IsosurfInterpolate(CIsosurf * I, float *v1, float *l1, float *v2, float *l2,
                                 float *pt)
  {
-diff -upNr pymol-open-source-2.3.0/layer0/os_predef.h pymol-open-source-2.3.3/layer0/os_predef.h
+diff -upNr pymol-open-source-2.3.0/layer0/os_predef.h pymol-open-source-2.3.4/layer0/os_predef.h
 --- pymol-open-source-2.3.0/layer0/os_predef.h	2019-02-11 15:08:10.000000000 +0100
-+++ pymol-open-source-2.3.3/layer0/os_predef.h	2019-08-22 13:04:51.315967452 +0200
++++ pymol-open-source-2.3.4/layer0/os_predef.h	2019-11-14 20:58:07.540725401 +0100
 @@ -49,10 +49,6 @@ typedef float aliased_float;
  
  /* BEGIN PROPRIETARY CODE SEGMENT (see disclaimer in "os_proprietary.h") */
@@ -298,9 +298,9 @@ diff -upNr pymol-open-source-2.3.0/layer0/os_predef.h pymol-open-source-2.3.3/la
  #ifdef WIN32
  #define PATH_SEP "\\"
  #else
-diff -upNr pymol-open-source-2.3.0/layer0/Tetsurf.cpp pymol-open-source-2.3.3/layer0/Tetsurf.cpp
+diff -upNr pymol-open-source-2.3.0/layer0/Tetsurf.cpp pymol-open-source-2.3.4/layer0/Tetsurf.cpp
 --- pymol-open-source-2.3.0/layer0/Tetsurf.cpp	2019-02-11 15:08:10.000000000 +0100
-+++ pymol-open-source-2.3.3/layer0/Tetsurf.cpp	2019-08-22 13:04:51.315967452 +0200
++++ pymol-open-source-2.3.4/layer0/Tetsurf.cpp	2019-11-14 20:58:07.540725401 +0100
 @@ -690,9 +690,7 @@ static void TetsurfPurge(CTetsurf * II)
  
  
@@ -332,9 +332,9 @@ diff -upNr pymol-open-source-2.3.0/layer0/Tetsurf.cpp pymol-open-source-2.3.3/la
  static void TetsurfInterpolate8(float *pt, float *v0, float l0, float *v1, float l1,
                                  float l2, float l3, float l4,
                                  float l5, float l6, float l7, float level)
-diff -upNr pymol-open-source-2.3.0/layer0/Vector.h pymol-open-source-2.3.3/layer0/Vector.h
+diff -upNr pymol-open-source-2.3.0/layer0/Vector.h pymol-open-source-2.3.4/layer0/Vector.h
 --- pymol-open-source-2.3.0/layer0/Vector.h	2019-02-11 15:08:10.000000000 +0100
-+++ pymol-open-source-2.3.3/layer0/Vector.h	2019-08-22 13:04:51.319967507 +0200
++++ pymol-open-source-2.3.4/layer0/Vector.h	2019-11-14 20:58:07.540725401 +0100
 @@ -398,7 +398,7 @@ inline void cross_product3f(const float
    cross[2] = (v1[0] * v2[1]) - (v1[1] * v2[0]);
  }
@@ -425,9 +425,9 @@ diff -upNr pymol-open-source-2.3.0/layer0/Vector.h pymol-open-source-2.3.3/layer
  {
    float dot;
  
-diff -upNr pymol-open-source-2.3.0/layer0/Version.h pymol-open-source-2.3.3/layer0/Version.h
+diff -upNr pymol-open-source-2.3.0/layer0/Version.h pymol-open-source-2.3.4/layer0/Version.h
 --- pymol-open-source-2.3.0/layer0/Version.h	2019-02-11 15:08:10.000000000 +0100
-+++ pymol-open-source-2.3.3/layer0/Version.h	2019-08-22 13:04:51.319967507 +0200
++++ pymol-open-source-2.3.4/layer0/Version.h	2019-11-14 20:58:07.544725431 +0100
 @@ -1,5 +1,5 @@
  #ifndef _PyMOL_VERSION
 -#define _PyMOL_VERSION "2.3.0"
@@ -435,9 +435,9 @@ diff -upNr pymol-open-source-2.3.0/layer0/Version.h pymol-open-source-2.3.3/laye
  #endif
  
  /* for session file compatibility */
-diff -upNr pymol-open-source-2.3.0/layer0/Word.cpp pymol-open-source-2.3.3/layer0/Word.cpp
+diff -upNr pymol-open-source-2.3.0/layer0/Word.cpp pymol-open-source-2.3.4/layer0/Word.cpp
 --- pymol-open-source-2.3.0/layer0/Word.cpp	2019-02-11 15:08:10.000000000 +0100
-+++ pymol-open-source-2.3.3/layer0/Word.cpp	2019-08-22 13:04:51.319967507 +0200
++++ pymol-open-source-2.3.4/layer0/Word.cpp	2019-11-14 20:58:07.544725431 +0100
 @@ -52,7 +52,6 @@ struct _CWordMatcher {
  #define cMatchAlphaRange  cWordMatchOptionAlphaRanges
  #define cMatchWildcard 3
@@ -454,9 +454,9 @@ diff -upNr pymol-open-source-2.3.0/layer0/Word.cpp pymol-open-source-2.3.3/layer
  
  void WordMatchOptionsConfigInteger(CWordMatchOptions * I)
  {
-diff -upNr pymol-open-source-2.3.0/layer0/Word.h pymol-open-source-2.3.3/layer0/Word.h
+diff -upNr pymol-open-source-2.3.0/layer0/Word.h pymol-open-source-2.3.4/layer0/Word.h
 --- pymol-open-source-2.3.0/layer0/Word.h	2019-02-11 15:08:10.000000000 +0100
-+++ pymol-open-source-2.3.3/layer0/Word.h	2019-08-22 13:04:51.319967507 +0200
++++ pymol-open-source-2.3.4/layer0/Word.h	2019-11-14 20:58:07.544725431 +0100
 @@ -91,52 +91,8 @@ int WordIndex(PyMOLGlobals * G, WordType
  int WordKey(PyMOLGlobals * G, WordKeyValue * list, const char *word, int minMatch, int ignCase,
              int *exact);
@@ -510,9 +510,9 @@ diff -upNr pymol-open-source-2.3.0/layer0/Word.h pymol-open-source-2.3.3/layer0/
  inline int WordCompare(PyMOLGlobals * G, const lexidx_t& s1, const lexidx_t& s2, int ignCase) {
    if (s1 == s2)
      return 0;
-diff -upNr pymol-open-source-2.3.0/layer1/Basis.cpp pymol-open-source-2.3.3/layer1/Basis.cpp
+diff -upNr pymol-open-source-2.3.0/layer1/Basis.cpp pymol-open-source-2.3.4/layer1/Basis.cpp
 --- pymol-open-source-2.3.0/layer1/Basis.cpp	2019-02-11 15:08:10.000000000 +0100
-+++ pymol-open-source-2.3.3/layer1/Basis.cpp	2019-08-22 13:04:51.319967507 +0200
++++ pymol-open-source-2.3.4/layer1/Basis.cpp	2019-11-14 20:58:07.548725460 +0100
 @@ -15,8 +15,6 @@ I* Additional authors of this source fil
  Z* -------------------------------------------------------------------
  */
@@ -651,9 +651,9 @@ diff -upNr pymol-open-source-2.3.0/layer1/Basis.cpp pymol-open-source-2.3.3/laye
 -typedef int this_file_is_no_longer_empty;
 -
 -#endif
-diff -upNr pymol-open-source-2.3.0/layer1/CGO.cpp pymol-open-source-2.3.3/layer1/CGO.cpp
+diff -upNr pymol-open-source-2.3.0/layer1/CGO.cpp pymol-open-source-2.3.4/layer1/CGO.cpp
 --- pymol-open-source-2.3.0/layer1/CGO.cpp	2019-02-11 15:08:10.000000000 +0100
-+++ pymol-open-source-2.3.3/layer1/CGO.cpp	2019-08-22 13:04:51.327967618 +0200
++++ pymol-open-source-2.3.4/layer1/CGO.cpp	2019-11-14 20:58:07.556725520 +0100
 @@ -4162,14 +4162,15 @@ CGO *CGOSimplify(const CGO * I, int est,
          float mid[3];
          mult3f(cyl->axis, .5f, mid);
@@ -715,9 +715,9 @@ diff -upNr pymol-open-source-2.3.0/layer1/CGO.cpp pymol-open-source-2.3.3/layer1
          }
        }
        break;
-diff -upNr pymol-open-source-2.3.0/layer1/CGO.h pymol-open-source-2.3.3/layer1/CGO.h
+diff -upNr pymol-open-source-2.3.0/layer1/CGO.h pymol-open-source-2.3.4/layer1/CGO.h
 --- pymol-open-source-2.3.0/layer1/CGO.h	2019-02-11 15:08:10.000000000 +0100
-+++ pymol-open-source-2.3.3/layer1/CGO.h	2019-08-22 13:04:51.327967618 +0200
++++ pymol-open-source-2.3.4/layer1/CGO.h	2019-11-14 20:58:07.556725520 +0100
 @@ -585,7 +585,7 @@ namespace cgo {
        static const int op_code = CGO_SHADER_CYLINDER_WITH_2ND_COLOR;
        shadercylinder2ndcolor(CGO *I, const float *_origin, const float *_axis, const float _radius,
@@ -727,9 +727,9 @@ diff -upNr pymol-open-source-2.3.0/layer1/CGO.h pymol-open-source-2.3.3/layer1/C
        float origin[3], axis[3], tube_size;
        int cap;
        float color2[3];
-diff -upNr pymol-open-source-2.3.0/layer1/FontType.cpp pymol-open-source-2.3.3/layer1/FontType.cpp
+diff -upNr pymol-open-source-2.3.0/layer1/FontType.cpp pymol-open-source-2.3.4/layer1/FontType.cpp
 --- pymol-open-source-2.3.0/layer1/FontType.cpp	2019-02-11 15:08:10.000000000 +0100
-+++ pymol-open-source-2.3.3/layer1/FontType.cpp	2019-08-22 13:04:51.327967618 +0200
++++ pymol-open-source-2.3.4/layer1/FontType.cpp	2019-11-14 20:58:07.556725520 +0100
 @@ -75,9 +75,6 @@ typedef struct {
    CTypeFace *TypeFace;
  } CFontType;
@@ -740,9 +740,9 @@ diff -upNr pymol-open-source-2.3.0/layer1/FontType.cpp pymol-open-source-2.3.3/l
  static const char *_FontTypeRenderOpenGL(RenderInfo * info,
                                     CFontType * I, const char *st,
                                     float size, int flat, float *rpos, short needSize, short relativeMode, short shouldRender SHADERCGOARG)
-diff -upNr pymol-open-source-2.3.0/layer1/Ray.cpp pymol-open-source-2.3.3/layer1/Ray.cpp
+diff -upNr pymol-open-source-2.3.0/layer1/Ray.cpp pymol-open-source-2.3.4/layer1/Ray.cpp
 --- pymol-open-source-2.3.0/layer1/Ray.cpp	2019-02-11 15:08:10.000000000 +0100
-+++ pymol-open-source-2.3.3/layer1/Ray.cpp	2019-08-22 13:04:51.331967673 +0200
++++ pymol-open-source-2.3.4/layer1/Ray.cpp	2019-11-14 20:58:07.560725550 +0100
 @@ -43,11 +43,7 @@ Z* -------------------------------------
  
  #define SettingGetfv SettingGetGlobal_3fv
@@ -822,9 +822,9 @@ diff -upNr pymol-open-source-2.3.0/layer1/Ray.cpp pymol-open-source-2.3.3/layer1
  
    {
      float *v;
-diff -upNr pymol-open-source-2.3.0/layer1/Scene.cpp pymol-open-source-2.3.3/layer1/Scene.cpp
+diff -upNr pymol-open-source-2.3.0/layer1/Scene.cpp pymol-open-source-2.3.4/layer1/Scene.cpp
 --- pymol-open-source-2.3.0/layer1/Scene.cpp	2019-02-11 15:08:10.000000000 +0100
-+++ pymol-open-source-2.3.3/layer1/Scene.cpp	2019-08-22 13:04:51.331967673 +0200
++++ pymol-open-source-2.3.4/layer1/Scene.cpp	2019-11-14 20:58:07.564725580 +0100
 @@ -2117,6 +2117,9 @@ int SceneMakeMovieImage(PyMOLGlobals * G
    PRINTFB(G, FB_Scene, FB_Blather)
      " Scene: Making movie image.\n" ENDFB(G);
@@ -835,9 +835,46 @@ diff -upNr pymol-open-source-2.3.0/layer1/Scene.cpp pymol-open-source-2.3.3/laye
    mode = SceneValidateImageMode(G, mode, width || height);
  
    I->DirtyFlag = false;
-diff -upNr pymol-open-source-2.3.0/layer2/CoordSet.cpp pymol-open-source-2.3.3/layer2/CoordSet.cpp
+diff -upNr pymol-open-source-2.3.0/layer1/SceneRay.cpp pymol-open-source-2.3.4/layer1/SceneRay.cpp
+--- pymol-open-source-2.3.0/layer1/SceneRay.cpp	2019-02-11 15:08:10.000000000 +0100
++++ pymol-open-source-2.3.4/layer1/SceneRay.cpp	2019-11-14 20:58:14.384776479 +0100
+@@ -14,6 +14,7 @@
+ static double accumTiming = 0.0;
+ 
+ /* EXPERIMENTAL VOLUME RAYTRACING DATA */
++static std::shared_ptr<pymol::Image> rayVolumeImage;
+ extern float *rayDepthPixels;
+ extern int rayVolume, rayWidth, rayHeight;
+ 
+@@ -363,6 +364,12 @@ bool SceneRay(PyMOLGlobals * G,
+           I->DirtyFlag = false;
+           I->CopyType = true;
+           I->CopyForced = true;
++
++          if (SettingGet<bool>(G, cSetting_ray_volume) && !I->Image->empty()) {
++            rayVolumeImage = I->Image;
++          } else {
++            rayVolumeImage = nullptr;
++          }
+         }
+         break;
+ 
+@@ -773,9 +780,10 @@ void SceneRenderRayVolume(PyMOLGlobals *
+ #endif
+   glDepthMask(GL_FALSE);
+ #ifndef PURE_OPENGL_ES_2
+-  if (PIsGlutThread() && I->Image && !I->Image->empty()){
++  if (PIsGlutThread() && rayVolumeImage) {
+     if (rayWidth == I->Width && rayHeight == I->Height){
+-      glDrawPixels(I->Image->getWidth(), I->Image->getHeight(), GL_RGBA, GL_UNSIGNED_BYTE, I->Image->bits());
++      glDrawPixels(rayVolumeImage->getWidth(), rayVolumeImage->getHeight(),
++          GL_RGBA, GL_UNSIGNED_BYTE, rayVolumeImage->bits());
+     } else {
+       SceneDrawImageOverlay(G, 1, NULL);
+     }
+diff -upNr pymol-open-source-2.3.0/layer2/CoordSet.cpp pymol-open-source-2.3.4/layer2/CoordSet.cpp
 --- pymol-open-source-2.3.0/layer2/CoordSet.cpp	2019-02-11 15:08:10.000000000 +0100
-+++ pymol-open-source-2.3.3/layer2/CoordSet.cpp	2019-08-22 13:04:51.335967729 +0200
++++ pymol-open-source-2.3.4/layer2/CoordSet.cpp	2019-11-14 20:58:07.564725580 +0100
 @@ -851,12 +851,12 @@ bool CoordSetInsureOrthogonal(PyMOLGloba
  }
  
@@ -852,9 +889,9 @@ diff -upNr pymol-open-source-2.3.0/layer2/CoordSet.cpp pymol-open-source-2.3.3/l
  {
    int i, j, k;
    float Re[3][3];
-diff -upNr pymol-open-source-2.3.0/layer2/CoordSet.h pymol-open-source-2.3.3/layer2/CoordSet.h
+diff -upNr pymol-open-source-2.3.0/layer2/CoordSet.h pymol-open-source-2.3.4/layer2/CoordSet.h
 --- pymol-open-source-2.3.0/layer2/CoordSet.h	2019-02-11 15:08:10.000000000 +0100
-+++ pymol-open-source-2.3.3/layer2/CoordSet.h	2019-08-22 13:04:51.335967729 +0200
++++ pymol-open-source-2.3.4/layer2/CoordSet.h	2019-11-14 20:58:07.564725580 +0100
 @@ -221,4 +221,7 @@ template <typename V> void SettingSet(in
    SettingSet(cs->State.G, &cs->Setting, index, value);
  }
@@ -863,9 +900,9 @@ diff -upNr pymol-open-source-2.3.0/layer2/CoordSet.h pymol-open-source-2.3.3/lay
 +bool RotateU(const double *matrix, float *anisou);
 +
  #endif
-diff -upNr pymol-open-source-2.3.0/layer2/ObjectGadgetRamp.cpp pymol-open-source-2.3.3/layer2/ObjectGadgetRamp.cpp
+diff -upNr pymol-open-source-2.3.0/layer2/ObjectGadgetRamp.cpp pymol-open-source-2.3.4/layer2/ObjectGadgetRamp.cpp
 --- pymol-open-source-2.3.0/layer2/ObjectGadgetRamp.cpp	2019-02-11 15:08:10.000000000 +0100
-+++ pymol-open-source-2.3.3/layer2/ObjectGadgetRamp.cpp	2019-08-22 13:04:51.335967729 +0200
++++ pymol-open-source-2.3.4/layer2/ObjectGadgetRamp.cpp	2019-11-14 20:58:07.568725609 +0100
 @@ -51,9 +51,6 @@ void ObjectGadgetRampFree(ObjectGadgetRa
    OOFreeP(I);
  }
@@ -886,9 +923,9 @@ diff -upNr pymol-open-source-2.3.0/layer2/ObjectGadgetRamp.cpp pymol-open-source
  static int _ObjectGadgetRampBlend(ObjectGadgetRamp * I, float *color,
                                    const float *table, int mode)
  {
-diff -upNr pymol-open-source-2.3.0/layer2/ObjectMesh.cpp pymol-open-source-2.3.3/layer2/ObjectMesh.cpp
+diff -upNr pymol-open-source-2.3.0/layer2/ObjectMesh.cpp pymol-open-source-2.3.4/layer2/ObjectMesh.cpp
 --- pymol-open-source-2.3.0/layer2/ObjectMesh.cpp	2019-02-11 15:08:10.000000000 +0100
-+++ pymol-open-source-2.3.3/layer2/ObjectMesh.cpp	2019-08-22 13:04:51.335967729 +0200
++++ pymol-open-source-2.3.4/layer2/ObjectMesh.cpp	2019-11-14 20:58:07.568725609 +0100
 @@ -782,7 +782,7 @@ static short ObjectMeshStateRenderShader
      RenderInfo *info, short mesh_as_cylinders, float mesh_width)
  {
@@ -909,9 +946,9 @@ diff -upNr pymol-open-source-2.3.0/layer2/ObjectMesh.cpp pymol-open-source-2.3.3
    if (ms->shaderUnitCellCGO){
      shaderPrg = G->ShaderMgr->Enable_DefaultShader(info->pass);
      shaderPrg->SetLightingEnabled(0);
-diff -upNr pymol-open-source-2.3.0/layer2/Sculpt.cpp pymol-open-source-2.3.3/layer2/Sculpt.cpp
+diff -upNr pymol-open-source-2.3.0/layer2/Sculpt.cpp pymol-open-source-2.3.4/layer2/Sculpt.cpp
 --- pymol-open-source-2.3.0/layer2/Sculpt.cpp	2019-02-11 15:08:10.000000000 +0100
-+++ pymol-open-source-2.3.3/layer2/Sculpt.cpp	2019-08-22 13:04:51.335967729 +0200
++++ pymol-open-source-2.3.4/layer2/Sculpt.cpp	2019-11-14 20:58:07.568725609 +0100
 @@ -70,9 +70,6 @@ Z* -------------------------------------
  (((((a)^((a)>>5)))&0x00FF)|\
   (((    ((b)<<5)))&0xFF00))
@@ -1002,9 +1039,9 @@ diff -upNr pymol-open-source-2.3.0/layer2/Sculpt.cpp pymol-open-source-2.3.3/lay
  static int SculptDoAvoid(float avoid, float range, float actual, float *d,
                           float *d0to1, float *d1to0, float wt, float *strain)
  {
-diff -upNr pymol-open-source-2.3.0/layer3/Executive.cpp pymol-open-source-2.3.3/layer3/Executive.cpp
+diff -upNr pymol-open-source-2.3.0/layer3/Executive.cpp pymol-open-source-2.3.4/layer3/Executive.cpp
 --- pymol-open-source-2.3.0/layer3/Executive.cpp	2019-02-11 15:08:10.000000000 +0100
-+++ pymol-open-source-2.3.3/layer3/Executive.cpp	2019-08-22 13:04:51.339967784 +0200
++++ pymol-open-source-2.3.4/layer3/Executive.cpp	2019-11-14 20:58:07.572725639 +0100
 @@ -1580,7 +1580,7 @@ static void ExecutiveInvalidateSceneMemb
    I->ValidSceneMembers = false;
  }
@@ -1014,9 +1051,9 @@ diff -upNr pymol-open-source-2.3.0/layer3/Executive.cpp pymol-open-source-2.3.3/
  {
    CExecutive *I = G->Executive;
    ExecutiveUpdateGroups(G, false);
-diff -upNr pymol-open-source-2.3.0/layer3/Executive.h pymol-open-source-2.3.3/layer3/Executive.h
+diff -upNr pymol-open-source-2.3.0/layer3/Executive.h pymol-open-source-2.3.4/layer3/Executive.h
 --- pymol-open-source-2.3.0/layer3/Executive.h	2019-02-11 15:08:10.000000000 +0100
-+++ pymol-open-source-2.3.3/layer3/Executive.h	2019-08-22 13:04:51.343967839 +0200
++++ pymol-open-source-2.3.4/layer3/Executive.h	2019-11-14 20:58:07.572725639 +0100
 @@ -167,6 +167,7 @@ int ExecutiveScrollTo(PyMOLGlobals * G,
  
  void ExecutiveInvalidateGroups(PyMOLGlobals * G, int force);
@@ -1025,9 +1062,9 @@ diff -upNr pymol-open-source-2.3.0/layer3/Executive.h pymol-open-source-2.3.3/la
  
  int *ExecutiveGetG3d(PyMOLGlobals * G);
  int ExecutiveOrder(PyMOLGlobals * G, const char *s1, int sort, int location);
-diff -upNr pymol-open-source-2.3.0/layer3/MaeExportHelpers.cpp pymol-open-source-2.3.3/layer3/MaeExportHelpers.cpp
+diff -upNr pymol-open-source-2.3.0/layer3/MaeExportHelpers.cpp pymol-open-source-2.3.4/layer3/MaeExportHelpers.cpp
 --- pymol-open-source-2.3.0/layer3/MaeExportHelpers.cpp	2019-02-11 15:08:10.000000000 +0100
-+++ pymol-open-source-2.3.3/layer3/MaeExportHelpers.cpp	2019-08-22 13:04:51.343967839 +0200
++++ pymol-open-source-2.3.4/layer3/MaeExportHelpers.cpp	2019-11-14 20:58:07.572725639 +0100
 @@ -197,3 +197,39 @@ std::string MaeExportGetSubGroupId(PyMOL
  
    return subgroupid;
@@ -1068,9 +1105,9 @@ diff -upNr pymol-open-source-2.3.0/layer3/MaeExportHelpers.cpp pymol-open-source
 +  quoted_text += '"';
 +  return quoted_text;
 +}
-diff -upNr pymol-open-source-2.3.0/layer3/MaeExportHelpers.h pymol-open-source-2.3.3/layer3/MaeExportHelpers.h
+diff -upNr pymol-open-source-2.3.0/layer3/MaeExportHelpers.h pymol-open-source-2.3.4/layer3/MaeExportHelpers.h
 --- pymol-open-source-2.3.0/layer3/MaeExportHelpers.h	2019-02-11 15:08:10.000000000 +0100
-+++ pymol-open-source-2.3.3/layer3/MaeExportHelpers.h	2019-08-22 13:04:51.343967839 +0200
++++ pymol-open-source-2.3.4/layer3/MaeExportHelpers.h	2019-11-14 20:58:07.572725639 +0100
 @@ -31,4 +31,6 @@ std::string MaeExportGetLabelUserText(Py
  std::string MaeExportGetSubGroupId(PyMOLGlobals * G,
      const CObject * obj);
@@ -1078,9 +1115,9 @@ diff -upNr pymol-open-source-2.3.0/layer3/MaeExportHelpers.h pymol-open-source-2
 +std::string MaeExportStrRepr(const char * text);
 +
  // vi:sw=2:expandtab
-diff -upNr pymol-open-source-2.3.0/layer3/MoleculeExporter.cpp pymol-open-source-2.3.3/layer3/MoleculeExporter.cpp
+diff -upNr pymol-open-source-2.3.0/layer3/MoleculeExporter.cpp pymol-open-source-2.3.4/layer3/MoleculeExporter.cpp
 --- pymol-open-source-2.3.0/layer3/MoleculeExporter.cpp	2019-02-11 15:08:10.000000000 +0100
-+++ pymol-open-source-2.3.3/layer3/MoleculeExporter.cpp	2019-08-22 13:04:51.343967839 +0200
++++ pymol-open-source-2.3.4/layer3/MoleculeExporter.cpp	2019-11-14 20:58:07.576725669 +0100
 @@ -1063,6 +1063,55 @@ struct MoleculeExporterMAE : public Mole
    int m_n_atoms_offset;
    int m_n_arom_bonds;
@@ -1328,9 +1365,9 @@ diff -upNr pymol-open-source-2.3.0/layer3/MoleculeExporter.cpp pymol-open-source
      m_atoms[getTmpID()] = ai;
  
      ++m_n_atoms;
-diff -upNr pymol-open-source-2.3.0/layer3/Selector.cpp pymol-open-source-2.3.3/layer3/Selector.cpp
+diff -upNr pymol-open-source-2.3.0/layer3/Selector.cpp pymol-open-source-2.3.4/layer3/Selector.cpp
 --- pymol-open-source-2.3.0/layer3/Selector.cpp	2019-02-11 15:08:10.000000000 +0100
-+++ pymol-open-source-2.3.3/layer3/Selector.cpp	2019-08-22 13:07:24.394413155 +0200
++++ pymol-open-source-2.3.4/layer3/Selector.cpp	2019-11-14 20:58:07.576725669 +0100
 @@ -14,6 +14,8 @@ I* Additional authors of this source fil
  Z* -------------------------------------------------------------------
  */
@@ -2319,9 +2356,9 @@ diff -upNr pymol-open-source-2.3.0/layer3/Selector.cpp pymol-open-source-2.3.3/l
      }
    }
    return (r);
-diff -upNr pymol-open-source-2.3.0/layer5/PyMOL.cpp pymol-open-source-2.3.3/layer5/PyMOL.cpp
+diff -upNr pymol-open-source-2.3.0/layer5/PyMOL.cpp pymol-open-source-2.3.4/layer5/PyMOL.cpp
 --- pymol-open-source-2.3.0/layer5/PyMOL.cpp	2019-02-11 15:08:10.000000000 +0100
-+++ pymol-open-source-2.3.3/layer5/PyMOL.cpp	2019-08-22 13:04:51.347967894 +0200
++++ pymol-open-source-2.3.4/layer5/PyMOL.cpp	2019-11-14 20:58:07.576725669 +0100
 @@ -230,13 +230,7 @@ typedef struct _CPyMOL {
  
  /* convenience functions -- inline */
@@ -2354,9 +2391,9 @@ diff -upNr pymol-open-source-2.3.0/layer5/PyMOL.cpp pymol-open-source-2.3.3/laye
  {
    PyMOLreturn_status result;
    result.status = status;
-diff -upNr pymol-open-source-2.3.0/modules/pmg_qt/mimic_tk.py pymol-open-source-2.3.3/modules/pmg_qt/mimic_tk.py
+diff -upNr pymol-open-source-2.3.0/modules/pmg_qt/mimic_tk.py pymol-open-source-2.3.4/modules/pmg_qt/mimic_tk.py
 --- pymol-open-source-2.3.0/modules/pmg_qt/mimic_tk.py	2019-02-11 15:08:10.000000000 +0100
-+++ pymol-open-source-2.3.3/modules/pmg_qt/mimic_tk.py	2019-08-22 13:04:51.347967894 +0200
++++ pymol-open-source-2.3.4/modules/pmg_qt/mimic_tk.py	2019-11-14 20:58:07.576725669 +0100
 @@ -127,17 +127,23 @@ class _qtFileDialog:
                  options.get('initialdir', ''))
  
@@ -2385,9 +2422,9 @@ diff -upNr pymol-open-source-2.3.0/modules/pmg_qt/mimic_tk.py pymol-open-source-
      }
  
      class MimicTkImporter:
-diff -upNr pymol-open-source-2.3.0/modules/pmg_qt/pymol_qt_gui.py pymol-open-source-2.3.3/modules/pmg_qt/pymol_qt_gui.py
+diff -upNr pymol-open-source-2.3.0/modules/pmg_qt/pymol_qt_gui.py pymol-open-source-2.3.4/modules/pmg_qt/pymol_qt_gui.py
 --- pymol-open-source-2.3.0/modules/pmg_qt/pymol_qt_gui.py	2019-02-11 15:08:10.000000000 +0100
-+++ pymol-open-source-2.3.3/modules/pmg_qt/pymol_qt_gui.py	2019-08-22 13:07:43.022746642 +0200
++++ pymol-open-source-2.3.4/modules/pmg_qt/pymol_qt_gui.py	2019-11-14 20:58:07.576725669 +0100
 @@ -848,7 +848,7 @@ PyMOL> color ye<TAB>    (will autocomple
          msg = [
              'The PyMOL Molecular Graphics System\n',
@@ -2426,9 +2463,9 @@ diff -upNr pymol-open-source-2.3.0/modules/pmg_qt/pymol_qt_gui.py pymol-open-sou
      # fix Windows taskbar icon
      if pymol.IS_WINDOWS:
          import ctypes
-diff -upNr pymol-open-source-2.3.0/modules/pymol/importing.py pymol-open-source-2.3.3/modules/pymol/importing.py
+diff -upNr pymol-open-source-2.3.0/modules/pymol/importing.py pymol-open-source-2.3.4/modules/pymol/importing.py
 --- pymol-open-source-2.3.0/modules/pymol/importing.py	2019-02-11 15:08:10.000000000 +0100
-+++ pymol-open-source-2.3.3/modules/pymol/importing.py	2019-08-22 13:14:56.508456970 +0200
++++ pymol-open-source-2.3.4/modules/pymol/importing.py	2019-11-14 20:58:07.580725699 +0100
 @@ -708,11 +708,6 @@ SEE ALSO
              if multiplex==None:
                  multiplex=-2
@@ -2529,9 +2566,9 @@ diff -upNr pymol-open-source-2.3.0/modules/pymol/importing.py pymol-open-source-
                      finish, discrete, quiet, multiplex, zoom)
  
          if not _self.is_error(r):
-diff -upNr pymol-open-source-2.3.0/modules/pymol/plugins/__init__.py pymol-open-source-2.3.3/modules/pymol/plugins/__init__.py
+diff -upNr pymol-open-source-2.3.0/modules/pymol/plugins/__init__.py pymol-open-source-2.3.4/modules/pymol/plugins/__init__.py
 --- pymol-open-source-2.3.0/modules/pymol/plugins/__init__.py	2019-02-11 15:08:10.000000000 +0100
-+++ pymol-open-source-2.3.3/modules/pymol/plugins/__init__.py	2019-08-22 13:07:37.202641784 +0200
++++ pymol-open-source-2.3.4/modules/pymol/plugins/__init__.py	2019-11-14 20:58:07.580725699 +0100
 @@ -198,8 +198,9 @@ class PluginInfo(object):
          Parse plugin file for metadata (hash-commented block at beginning of file).
          '''
@@ -2564,9 +2601,9 @@ diff -upNr pymol-open-source-2.3.0/modules/pymol/plugins/__init__.py pymol-open-
  
      autoload = (pmgapp != -2)
      for parent in [startup]:
-diff -upNr pymol-open-source-2.3.0/modules/pymol/plugins/installation.py pymol-open-source-2.3.3/modules/pymol/plugins/installation.py
+diff -upNr pymol-open-source-2.3.0/modules/pymol/plugins/installation.py pymol-open-source-2.3.4/modules/pymol/plugins/installation.py
 --- pymol-open-source-2.3.0/modules/pymol/plugins/installation.py	2019-02-11 15:08:10.000000000 +0100
-+++ pymol-open-source-2.3.3/modules/pymol/plugins/installation.py	2019-08-22 13:07:31.698543171 +0200
++++ pymol-open-source-2.3.4/modules/pymol/plugins/installation.py	2019-11-14 20:58:07.580725699 +0100
 @@ -131,6 +131,9 @@ def extract_zipfile(ofile, ext):
      if len(names) == 0:
          raise BadInstallationFile('Missing __init__.py')
@@ -2592,9 +2629,9 @@ diff -upNr pymol-open-source-2.3.0/modules/pymol/plugins/installation.py pymol-o
          return
  
      finally:
-diff -upNr pymol-open-source-2.3.0/modules/pymol/plugins/legacysupport.py pymol-open-source-2.3.3/modules/pymol/plugins/legacysupport.py
+diff -upNr pymol-open-source-2.3.0/modules/pymol/plugins/legacysupport.py pymol-open-source-2.3.4/modules/pymol/plugins/legacysupport.py
 --- pymol-open-source-2.3.0/modules/pymol/plugins/legacysupport.py	2019-02-11 15:08:10.000000000 +0100
-+++ pymol-open-source-2.3.3/modules/pymol/plugins/legacysupport.py	2019-08-22 13:04:51.351967950 +0200
++++ pymol-open-source-2.3.4/modules/pymol/plugins/legacysupport.py	2019-11-14 20:58:07.580725699 +0100
 @@ -153,9 +153,10 @@ def createlegacypmgapp():
  
  class _tkMessageBox(object):
@@ -2621,9 +2658,9 @@ diff -upNr pymol-open-source-2.3.0/modules/pymol/plugins/legacysupport.py pymol-
              import tkinter.filedialog as module
          wrapped = getattr(module, name)
          def dialog(parent=None, *args, **kwargs):
-diff -upNr pymol-open-source-2.3.0/ov/src/ov_defines.h pymol-open-source-2.3.3/ov/src/ov_defines.h
+diff -upNr pymol-open-source-2.3.0/ov/src/ov_defines.h pymol-open-source-2.3.4/ov/src/ov_defines.h
 --- pymol-open-source-2.3.0/ov/src/ov_defines.h	2019-02-11 15:08:10.000000000 +0100
-+++ pymol-open-source-2.3.3/ov/src/ov_defines.h	2019-08-22 13:04:51.351967950 +0200
++++ pymol-open-source-2.3.4/ov/src/ov_defines.h	2019-11-14 20:58:07.580725699 +0100
 @@ -14,13 +14,8 @@
  
  /* defines */
@@ -2639,9 +2676,9 @@ diff -upNr pymol-open-source-2.3.0/ov/src/ov_defines.h pymol-open-source-2.3.3/o
  
  #ifndef OV_FALSE
  #define OV_FALSE 0
-diff -upNr pymol-open-source-2.3.0/setup.py pymol-open-source-2.3.3/setup.py
+diff -upNr pymol-open-source-2.3.0/setup.py pymol-open-source-2.3.4/setup.py
 --- pymol-open-source-2.3.0/setup.py	2019-02-11 15:08:10.000000000 +0100
-+++ pymol-open-source-2.3.3/setup.py	2019-08-22 13:04:51.351967950 +0200
++++ pymol-open-source-2.3.4/setup.py	2019-11-14 20:58:07.580725699 +0100
 @@ -245,7 +245,6 @@ pymol_src_dirs = [
  def_macros = [
      ("_PYMOL_LIBPNG", None),
