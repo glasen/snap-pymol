@@ -1,7 +1,6 @@
-diff a/examples/devel/importing.py b/examples/devel/importing.py
-index f704356f..2daadf58 100644
---- a/examples/devel/importing.py
-+++ b/examples/devel/importing.py
+diff -upNr pymol-open-source-2.4.0.orig/examples/devel/importing.py pymol-open-source-2.4.0.patched/examples/devel/importing.py
+--- pymol-open-source-2.4.0.orig/examples/devel/importing.py	2020-05-20 10:22:48.000000000 +0200
++++ pymol-open-source-2.4.0.patched/examples/devel/importing.py	2020-06-12 13:59:07.013386767 +0200
 @@ -12,13 +12,12 @@
  # sleep a second after importing.
  
@@ -17,10 +16,9 @@ index f704356f..2daadf58 100644
  import pymol
  
  # give PyMOL enough time to initialize (we need to find a safe and
-diff a/examples/devel/syncmol.py b/examples/devel/syncmol.py
-index ef55cd24..bbce8926 100644
---- a/examples/devel/syncmol.py
-+++ b/examples/devel/syncmol.py
+diff -upNr pymol-open-source-2.4.0.orig/examples/devel/syncmol.py pymol-open-source-2.4.0.patched/examples/devel/syncmol.py
+--- pymol-open-source-2.4.0.orig/examples/devel/syncmol.py	2020-05-20 10:22:48.000000000 +0200
++++ pymol-open-source-2.4.0.patched/examples/devel/syncmol.py	2020-06-12 13:59:07.013386767 +0200
 @@ -195,7 +195,7 @@ if __name__=='pymol':
              _stdin_reader_thread.setDaemon(1)
              _stdin_reader_thread.start()
@@ -30,10 +28,54 @@ index ef55cd24..bbce8926 100644
              if len(addr)==1:
                  host = 'localhost'
                  port = int(addr[0])
-diff a/modules/chempy/cc1.py b/modules/chempy/cc1.py
-index 199fff4a..2328c988 100644
---- a/modules/chempy/cc1.py
-+++ b/modules/chempy/cc1.py
+diff -upNr pymol-open-source-2.4.0.orig/layer0/Version.h pymol-open-source-2.4.0.patched/layer0/Version.h
+--- pymol-open-source-2.4.0.orig/layer0/Version.h	2020-05-20 10:22:48.000000000 +0200
++++ pymol-open-source-2.4.0.patched/layer0/Version.h	2020-06-12 14:17:35.585673245 +0200
+@@ -1,5 +1,5 @@
+ #ifndef _PyMOL_VERSION
+-#define _PyMOL_VERSION "2.4.0"
++#define _PyMOL_VERSION "2.4.1"
+ #endif
+ 
+ /* for session file compatibility */
+diff -upNr pymol-open-source-2.4.0.orig/layer2/CifMoleculeReader.cpp pymol-open-source-2.4.0.patched/layer2/CifMoleculeReader.cpp
+--- pymol-open-source-2.4.0.orig/layer2/CifMoleculeReader.cpp	2020-05-20 10:22:48.000000000 +0200
++++ pymol-open-source-2.4.0.patched/layer2/CifMoleculeReader.cpp	2020-06-12 13:59:17.477409302 +0200
+@@ -370,10 +370,31 @@ static bool read_chem_comp_bond_dict(con
+       (arr_id_1 = data->get_arr("_chem_comp_atom.atom_id")) &&
+       (arr_id_2 = data->get_arr("_chem_comp_atom.alt_atom_id"))) {
+     nrows = arr_id_1->size();
++
++    // set of all non-alt ids
++    std::set<pymol::zstring_view> atom_ids;
++    for (int i = 0; i < nrows; ++i) {
++      atom_ids.insert(arr_id_1->as_s(i));
++    }
++
+     for (int i = 0; i < nrows; ++i) {
+       resn = arr_comp_id->as_s(i);
+       name1 = arr_id_1->as_s(i);
+       name2 = arr_id_2->as_s(i);
++
++      // skip identity mapping
++      if (strcmp(name1, name2) == 0) {
++        continue;
++      }
++
++      // alt id must not also be a non-alt id (PYMOL-3470)
++      if (atom_ids.count(name2)) {
++        fprintf(stderr,
++            "Warning: _chem_comp_atom.alt_atom_id %s/%s ignored for bonding\n",
++            resn, name2);
++        continue;
++      }
++
+       bond_dict[resn].add_alt_name(name1, name2);
+     }
+   }
+diff -upNr pymol-open-source-2.4.0.orig/modules/chempy/cc1.py pymol-open-source-2.4.0.patched/modules/chempy/cc1.py
+--- pymol-open-source-2.4.0.orig/modules/chempy/cc1.py	2020-05-20 10:22:48.000000000 +0200
++++ pymol-open-source-2.4.0.patched/modules/chempy/cc1.py	2020-06-12 13:59:07.013386767 +0200
 @@ -15,8 +15,6 @@
  from chempy.models import Indexed
  from chempy import Storage,Atom,Bond
@@ -43,7 +85,7 @@ index 199fff4a..2328c988 100644
  class CC1(Storage): # ChemDraw3D 5.0 std., cartesian coordinates
  
      def fromList(self,molList):
-@@ -33,12 +31,12 @@ class CC1(Storage): # ChemDraw3D 5.0 std., cartesian coordinates
+@@ -33,12 +31,12 @@ class CC1(Storage): # ChemDraw3D 5.0 std
          for a in range(nAtom):
              at = Atom()
              at.index = cnt
@@ -59,10 +101,9 @@ index 199fff4a..2328c988 100644
              at.bonds = lst
              irec = irec + 1
              cnt = cnt + 1
-diff a/modules/chempy/mmd.py b/modules/chempy/mmd.py
-index ef8e16fe..a93262c3 100644
---- a/modules/chempy/mmd.py
-+++ b/modules/chempy/mmd.py
+diff -upNr pymol-open-source-2.4.0.orig/modules/chempy/mmd.py pymol-open-source-2.4.0.patched/modules/chempy/mmd.py
+--- pymol-open-source-2.4.0.orig/modules/chempy/mmd.py	2020-05-20 10:22:48.000000000 +0200
++++ pymol-open-source-2.4.0.patched/modules/chempy/mmd.py	2020-06-12 13:59:07.013386767 +0200
 @@ -17,7 +17,6 @@ from __future__ import print_function
  from chempy.models import Indexed,Connected
  from chempy import Storage,Atom,Bond
@@ -115,10 +156,9 @@ index ef8e16fe..a93262c3 100644
              if len(name): at.name = name
              model.atom.append(at)
              irec = irec + 1
-diff a/modules/chempy/mol.py b/modules/chempy/mol.py
-index 175a248f..748a0aed 100644
---- a/modules/chempy/mol.py
-+++ b/modules/chempy/mol.py
+diff -upNr pymol-open-source-2.4.0.orig/modules/chempy/mol.py pymol-open-source-2.4.0.patched/modules/chempy/mol.py
+--- pymol-open-source-2.4.0.orig/modules/chempy/mol.py	2020-05-20 10:22:48.000000000 +0200
++++ pymol-open-source-2.4.0.patched/modules/chempy/mol.py	2020-06-12 13:59:07.013386767 +0200
 @@ -20,7 +20,6 @@ try:
  except ImportError:
      CmdException = Exception
@@ -158,10 +198,9 @@ index 175a248f..748a0aed 100644
                  cll = int(cl[0])*2
                  a=1
                  while a<=cll:
-diff a/modules/chempy/pdb.py b/modules/chempy/pdb.py
-index 505731e2..0d061be3 100644
---- a/modules/chempy/pdb.py
-+++ b/modules/chempy/pdb.py
+diff -upNr pymol-open-source-2.4.0.orig/modules/chempy/pdb.py pymol-open-source-2.4.0.patched/modules/chempy/pdb.py
+--- pymol-open-source-2.4.0.orig/modules/chempy/pdb.py	2020-05-20 10:22:48.000000000 +0200
++++ pymol-open-source-2.4.0.patched/modules/chempy/pdb.py	2020-06-12 13:59:07.017386777 +0200
 @@ -14,7 +14,6 @@
  
  from chempy import Storage,Atom
@@ -198,10 +237,9 @@ index 505731e2..0d061be3 100644
                  if not len(at.symbol):
                      at.symbol = at.name[0:1]
                      if at.symbol in '012345678':
-diff a/modules/chempy/sdf.py b/modules/chempy/sdf.py
-index a36cd8d3..78e462f8 100644
---- a/modules/chempy/sdf.py
-+++ b/modules/chempy/sdf.py
+diff -upNr pymol-open-source-2.4.0.orig/modules/chempy/sdf.py pymol-open-source-2.4.0.patched/modules/chempy/sdf.py
+--- pymol-open-source-2.4.0.orig/modules/chempy/sdf.py	2020-05-20 10:22:48.000000000 +0200
++++ pymol-open-source-2.4.0.patched/modules/chempy/sdf.py	2020-06-12 13:59:07.017386777 +0200
 @@ -14,7 +14,6 @@
  
  from __future__ import print_function
@@ -237,10 +275,9 @@ index a36cd8d3..78e462f8 100644
              # does this look like a URL? (but not a DOS path)
              try:
                  from urllib import urlopen
-diff a/modules/chempy/tinker/amber.py b/modules/chempy/tinker/amber.py
-index 7ded34b2..1f4deec0 100644
---- a/modules/chempy/tinker/amber.py
-+++ b/modules/chempy/tinker/amber.py
+diff -upNr pymol-open-source-2.4.0.orig/modules/chempy/tinker/amber.py pymol-open-source-2.4.0.patched/modules/chempy/tinker/amber.py
+--- pymol-open-source-2.4.0.orig/modules/chempy/tinker/amber.py	2020-05-20 10:22:48.000000000 +0200
++++ pymol-open-source-2.4.0.patched/modules/chempy/tinker/amber.py	2020-06-12 13:59:07.017386777 +0200
 @@ -16,7 +16,6 @@ from __future__ import print_function
  
  from chempy import feedback
@@ -490,10 +527,9 @@ index 7ded34b2..1f4deec0 100644
                       )
              torsion[kee] = a
          kees = list(torsion.keys())
-diff a/modules/chempy/tinker/state.py b/modules/chempy/tinker/state.py
-index 93e3f286..2df7187e 100644
---- a/modules/chempy/tinker/state.py
-+++ b/modules/chempy/tinker/state.py
+diff -upNr pymol-open-source-2.4.0.orig/modules/chempy/tinker/state.py pymol-open-source-2.4.0.patched/modules/chempy/tinker/state.py
+--- pymol-open-source-2.4.0.orig/modules/chempy/tinker/state.py	2020-05-20 10:22:48.000000000 +0200
++++ pymol-open-source-2.4.0.patched/modules/chempy/tinker/state.py	2020-06-12 13:59:07.017386777 +0200
 @@ -17,7 +17,6 @@ from __future__ import print_function
  from chempy import tinker,io,feedback
  from chempy.tinker import keyword
@@ -530,10 +566,9 @@ index 93e3f286..2df7187e 100644
                      except ValueError:
                          pass
              f.close()
-diff a/modules/pmg_tk/startup/apbs_tools.py b/modules/pmg_tk/startup/apbs_tools.py
-index 75f06f22..473379bc 100644
---- a/modules/pmg_tk/startup/apbs_tools.py
-+++ b/modules/pmg_tk/startup/apbs_tools.py
+diff -upNr pymol-open-source-2.4.0.orig/modules/pmg_tk/startup/apbs_tools.py pymol-open-source-2.4.0.patched/modules/pmg_tk/startup/apbs_tools.py
+--- pymol-open-source-2.4.0.orig/modules/pmg_tk/startup/apbs_tools.py	2020-05-20 10:22:48.000000000 +0200
++++ pymol-open-source-2.4.0.patched/modules/pmg_tk/startup/apbs_tools.py	2020-06-12 13:59:07.017386777 +0200
 @@ -145,7 +145,6 @@ APBS_DEFAULT=True
  
  import tempfile
@@ -551,3 +586,17 @@ index 75f06f22..473379bc 100644
      searchDirs.append(os.path.join("/usr", "local", "bin"))
      searchDirs.append(os.path.join("/opt", "local", "bin"))
      searchDirs.append(os.path.join("/sw", "bin"))
+diff -upNr pymol-open-source-2.4.0.orig/modules/pymol/creating.py pymol-open-source-2.4.0.patched/modules/pymol/creating.py
+--- pymol-open-source-2.4.0.orig/modules/pymol/creating.py	2020-05-20 10:22:48.000000000 +0200
++++ pymol-open-source-2.4.0.patched/modules/pymol/creating.py	2020-06-12 13:59:23.901423112 +0200
+@@ -557,6 +557,10 @@ SEE ALSO
+ '''
+         # preprocess selection
+         selection = selector.process(selection)
++        if selection and selection not in ('center', 'origin'):
++            # force molecular selection, otherwise "all" or name patterns can
++            # expand to non-molecular objects (like the map itself).
++            selection = "(" + selection + ")"
+         #
+         if carve is None:
+             carve=0.0
