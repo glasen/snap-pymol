@@ -89,19 +89,6 @@ parts:
     - locales-all
 
 
-  pmw:
-    plugin: python
-    source-type: git
-    source: https://github.com/schrodinger/pmw-patched.git
-    stage-packages:
-      - libpython3.8-dev
-    override-build: |
-      python3 setup.py --no-user-cfg install --prefix="${SNAPCRAFT_PART_INSTALL}/usr"
-      mkdir -p ${SNAPCRAFT_PART_INSTALL}/usr/lib/python3/dist-packages
-      mv ${SNAPCRAFT_PART_INSTALL}/usr/lib/python3.8/site-packages/* ${SNAPCRAFT_PART_INSTALL}/usr/lib/python3/dist-packages
-      rm -rf ${SNAPCRAFT_PART_INSTALL}/usr/lib/python3.8/site-packages
-
-
   mmtf-cpp:
     plugin: cmake
     cmake-parameters: [-DCMAKE_INSTALL_PREFIX=/usr/]
@@ -143,12 +130,12 @@ parts:
       - python3-numpy
       - python3-pyqt5
       - python3-pyqt5.qtopengl
-      - python3-tk
       - qtwayland5
       - qt5-gtk-platformtheme
       - libnetcdf15
       - python3.8-minimal
       - python3-distutils
+      - python3-tk
     override-build: |
       patch -p1 < ${SNAPCRAFT_STAGE}/patches/2.4.1.patch
       python3 setup.py --use-msgpackc c++11 install --home=/snap/pymol-oss/current/usr
@@ -160,4 +147,4 @@ parts:
       rm ${SNAPCRAFT_PART_INSTALL}/usr/bin/pymol
       rm -rf /snap/pymol-oss ${SNAPCRAFT_PART_INSTALL}/usr/lib/python
   
-    after: [pmw, mmtf-cpp, desktop-qt5, local]
+    after: [mmtf-cpp, desktop-qt5, local]
