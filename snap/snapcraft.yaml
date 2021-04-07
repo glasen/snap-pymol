@@ -43,6 +43,7 @@ apps:
       - home
       - opengl
       - gsettings
+      - removable-media
 
 
 plugs:
