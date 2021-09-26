@@ -1,0 +1,26 @@
+From 817ba934c94296d10fb644c619f4edc4410e9c35 Mon Sep 17 00:00:00 2001
+From: Jarrett Johnson <jarrett.johnson@schrodinger.com>
+Date: Fri, 28 May 2021 19:47:12 -0400
+Subject: [PATCH] PYMOL-3684 Allow parsing of decorated functions
+
+---
+ modules/pymol/parsing.py | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/modules/pymol/parsing.py b/modules/pymol/parsing.py
+index 2709fc40..ba4df43e 100644
+--- a/modules/pymol/parsing.py
++++ b/modules/pymol/parsing.py
+@@ -343,6 +343,9 @@ if True:
+ 
+         arg = []
+         kw = {}
++
++        fn = inspect.unwrap(fn)
++
+         co = fn.__code__
+ 
+         # disable error checking for *arg or **kw functions
+-- 
+2.32.0
+

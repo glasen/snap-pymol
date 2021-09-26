@@ -1,0 +1,10 @@
+diff -upNr pymol-open-source-2.5.0.orig/layer0/Version.h pymol-open-source-2.5.0.patched/layer0/Version.h
+--- pymol-open-source-2.5.0.orig/layer0/Version.h	2021-09-25 19:55:27.241958229 +0200
++++ pymol-open-source-2.5.0.patched/layer0/Version.h	2021-09-25 19:56:15.297884614 +0200
+@@ -1,5 +1,5 @@
+ #ifndef _PyMOL_VERSION
+-#define _PyMOL_VERSION "2.5.0"
++#define _PyMOL_VERSION "2.5.2"
+ #endif
+ 
+ /* for session file compatibility */

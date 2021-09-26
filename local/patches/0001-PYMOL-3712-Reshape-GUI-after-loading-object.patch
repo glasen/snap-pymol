@@ -1,0 +1,25 @@
+From 03ceb6fb415c2a6b65a9847d678e74829c2f250e Mon Sep 17 00:00:00 2001
+From: Jarrett Johnson <jarrett.johnson@schrodinger.com>
+Date: Wed, 14 Jul 2021 12:47:13 -0400
+Subject: [PATCH] PYMOL-3712 Reshape GUI after loading object
+
+---
+ layer3/Executive.cpp | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/layer3/Executive.cpp b/layer3/Executive.cpp
+index ad3aa8ff..68b039d4 100644
+--- a/layer3/Executive.cpp
++++ b/layer3/Executive.cpp
+@@ -4043,6 +4043,8 @@ pymol::Result<> ExecutiveLoad(PyMOLGlobals* G, ExecutiveLoadArgs const& args)
+       "%s", buf ENDFB(G);
+   }
+ 
++  // Reshape movie in case multi-state.
++  OrthoReshape(G, -1, -1, false);
+   return {};
+ }
+ 
+-- 
+2.32.0
+

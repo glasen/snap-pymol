@@ -1,5 +1,5 @@
 name: pymol-oss
-version: '2.5.0'
+version: '2.5.2'
 base: core20
 summary: PyMOL is a molecular visualization system.
 description: |
@@ -111,10 +111,10 @@ parts:
     prime: [-*]
 
   
-  # patches:
-  #   source: local/patches
-  #   plugin: dump
-  #   prime: [-*]
+  patches:
+    source: local/patches
+    plugin: dump
+    prime: [-*]
 
 
   pymol-oss:
@@ -144,6 +144,7 @@ parts:
       - python3-distutils
       - python3-tk
     override-build: |
+      for commit in `ls ${SNAPCRAFT_STAGE}/patches`; do patch -p1 < ${SNAPCRAFT_STAGE}/patches/$commit; done
       python3 setup.py --use-msgpackc c++11 install --home=/snap/pymol-oss/current/usr
       mv /snap/pymol-oss/current/usr/lib/python/pymol/pymol_path ${SNAPCRAFT_PART_INSTALL}/usr/share/pymol
       cp -r /snap/pymol-oss/current/usr ${SNAPCRAFT_PART_INSTALL}/
