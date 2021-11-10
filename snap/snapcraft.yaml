@@ -47,6 +47,12 @@ apps:
       - removable-media
 
 
+layout:
+  /usr/share/libdrm:
+    bind: $SNAP/usr/share/libdrm
+
+
+
 plugs:
   gnome-3-38-2004:
     default-provider: gnome-3-38-2004
@@ -131,18 +137,23 @@ parts:
       - libpython3.8-dev
       - python3-numpy
       - libnetcdf-dev
+      - libsqlite3-dev
     stage-packages:
       - libglew2.1
       - libqt5gui5
       - python3-numpy
       - python3-pyqt5
       - python3-pyqt5.qtopengl
+      - sqlite3
       - qtwayland5
       - qt5-gtk-platformtheme
       - libnetcdf15
       - python3.8-minimal
       - python3-distutils
       - python3-tk
+      - ffmpeg
+      - libglu1-mesa
+      - freeglut3
     override-build: |
       for commit in `ls ${SNAPCRAFT_STAGE}/patches`; do patch -p1 < ${SNAPCRAFT_STAGE}/patches/$commit; done
       python3 setup.py --use-msgpackc c++11 install --home=/snap/pymol-oss/current/usr
