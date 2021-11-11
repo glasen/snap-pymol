@@ -25,6 +25,7 @@ icon: snap/gui/icon.svg
 grade: stable
 confinement: strict
 
+compression: lzo
 
 apps:
   pymol:
