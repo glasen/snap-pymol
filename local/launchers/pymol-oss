@@ -1,2 +1,2 @@
 #!/bin/sh
-"/snap/pymol-oss/current/usr/bin/python3.8" "/snap/pymol-oss/current/usr/lib/python3/dist-packages/pymol/__init__.py" "$@"
+python3 "/snap/pymol-oss/current/usr/lib/python3/dist-packages/pymol/__init__.py" "$@"
