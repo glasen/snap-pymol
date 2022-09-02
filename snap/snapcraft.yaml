@@ -33,7 +33,6 @@ apps:
     extensions: [kde-neon]
     command: usr/bin/pymol-oss
     environment:
-      DISABLE_WAYLAND: 1
       PYMOL_PATH: /snap/pymol-oss/current/usr/share/pymol
     plugs:
       - desktop
@@ -44,6 +43,7 @@ apps:
       - removable-media
       - unity7
       - wayland
+      - x11
 
 
 layout:
