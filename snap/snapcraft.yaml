@@ -1,5 +1,5 @@
 name: pymol-oss
-version: '2.5.2'
+version: '2.5-master-59ca205a'
 base: core20
 summary: PyMOL is a molecular visualization system.
 description: |
@@ -30,13 +30,10 @@ compression: lzo
 apps:
   pymol:
     adapter: full
-    extensions: [gnome-3-38]
-    command-chain:
-      - bin/desktop-launch
+    extensions: [kde-neon]
     command: usr/bin/pymol-oss
     environment:
       DISABLE_WAYLAND: 1
-      QT_QPA_PLATFORMTHEME: gtk3
       PYMOL_PATH: /snap/pymol-oss/current/usr/share/pymol
     plugs:
       - desktop
@@ -54,47 +51,29 @@ layout:
     bind: $SNAP/usr/share/libdrm
 
 
-
 plugs:
-  gnome-3-38-2004:
-    default-provider: gnome-3-38-2004
-    interface: content
-    target: $SNAP/gnome-platform
   gtk-3-themes:
     interface: content
     target: $SNAP/data-dir/themes
-    default-provider: gtk-common-themes
+    default-provider: gtk-common-themes:gtk-3-themes
   icon-themes:
     interface: content
     target: $SNAP/data-dir/icons
-    default-provider: gtk-common-themes
+    default-provider: gtk-common-themes:icon-themes
   sound-themes:
     interface: content
     target: $SNAP/data-dir/sounds
-    default-provider: gtk-common-themes
+    default-provider: gtk-common-themes:sounds-themes
 
+
+package-repositories:
+  - type: apt
+    components: [main]
+    suites: [focal]
+    key-id: 444DABCF3667D0283F894EDDE6D4736255751E5D
+    url: http://archive.neon.kde.org/user
 
 parts:
-  desktop-qt5:
-    build-packages:
-    - qtbase5-dev
-    - dpkg-dev
-    make-parameters:
-    - FLAVOR=qt5
-    plugin: make
-    source: https://github.com/ubuntu/snapcraft-desktop-helpers.git
-    source-subdir: qt
-    stage-packages:
-      - libgdk-pixbuf2.0-0
-      - libqt5gui5
-      - libqt5svg5
-      - libxkbcommon0
-      - locales-all
-      - shared-mime-info
-      - ttf-ubuntu-font-family
-      - xdg-user-dirs
-
-
   mmtf-cpp:
     plugin: cmake
     cmake-parameters: [-DCMAKE_INSTALL_PREFIX=/usr/]
@@ -106,8 +85,9 @@ parts:
 
   pymol-oss:
     plugin: python
-    source-type: tar
-    source: https://github.com/schrodinger/pymol-open-source/archive/v2.5.0.tar.gz
+    source-type: git
+    source: https://github.com/schrodinger/pymol-open-source.git
+    source-commit: 59ca205a81ccdaf488f5de088c14cb5eee528495
     build-packages: 
       - libfreetype6-dev
       - libglew-dev
@@ -147,4 +127,22 @@ parts:
       chmod +x ${SNAPCRAFT_PART_INSTALL}/usr/bin/pymol-oss
       rm ${SNAPCRAFT_PART_INSTALL}/usr/bin/pymol
       rm -rf /snap/pymol-oss ${SNAPCRAFT_PART_INSTALL}/usr/lib/python  
-    after: [mmtf-cpp, desktop-qt5]
+    after: [mmtf-cpp]
+
+  cleanup:
+    after:
+      -  pymol-oss
+    plugin: nil
+    build-snaps:
+      - kde-frameworks-5-96-qt-5-15-5-core20
+    override-prime: |
+        set -eux
+        for snap in "kde-frameworks-5-96-qt-5-15-5-core20"; do  # List all content-snaps you're using here
+            cd "/snap/$snap/current" && find . -type f,l -exec rm -f "$SNAPCRAFT_PRIME/{}" "$SNAPCRAFT_PRIME/usr/{}" \;
+        done
+        for CRUFT in bug lintian man; do
+            rm -rf $SNAPCRAFT_PRIME/usr/share/$CRUFT
+        done
+        find $SNAPCRAFT_PRIME/usr/share/doc/ -type f -not -name 'copyright' -delete
+        find $SNAPCRAFT_PRIME/usr/share -type d -empty -delete
+
