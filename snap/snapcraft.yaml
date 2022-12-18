@@ -1,5 +1,5 @@
 name: pymol-oss
-version: '2.5-master-59ca205a'
+version: '2.5-master-d24468af'
 base: core20
 summary: PyMOL is a molecular visualization system.
 description: |
