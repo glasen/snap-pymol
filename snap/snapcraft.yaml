@@ -1,5 +1,5 @@
 name: pymol-oss
-version: '2.5-master-d24468af'
+version: '2.5-master-7c931c89'
 base: core20
 summary: PyMOL is a molecular visualization system.
 description: |
@@ -87,7 +87,7 @@ parts:
     plugin: python
     source-type: git
     source: https://github.com/schrodinger/pymol-open-source.git
-    source-commit: d24468af04ab764804fb87c6da6dde301ab911b2
+    source-commit: 7c931c893a8a22eeeed915bec0c24cff52981eb0
     build-packages: 
       - libfreetype6-dev
       - libglew-dev
