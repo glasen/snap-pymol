@@ -1,5 +1,5 @@
 name: pymol-oss
-version: '2.5-master-7c931c89'
+version: '2.5-master-d0a33806'
 base: core20
 summary: PyMOL is a molecular visualization system.
 description: |
@@ -11,7 +11,7 @@ description: |
     author, by 2009, almost a quarter of all published images of 3D protein structures in the scientific literature were
     made using PyMOL.
 
-    This is the Open Source version of PyMOL. The source code is availabe on GitHub:
+    This is the Open Source version of PyMOL. The source code is available on GitHub:
 
     https://github.com/schrodinger/pymol-open-source
 
@@ -87,7 +87,7 @@ parts:
     plugin: python
     source-type: git
     source: https://github.com/schrodinger/pymol-open-source.git
-    source-commit: 7c931c893a8a22eeeed915bec0c24cff52981eb0
+    source-commit: d0a3380636e3d4079a0320b372a330dcf797d660
     build-packages: 
       - libfreetype6-dev
       - libglew-dev
@@ -134,10 +134,10 @@ parts:
       -  pymol-oss
     plugin: nil
     build-snaps:
-      - kde-frameworks-5-96-qt-5-15-5-core20
+      - kde-frameworks-5-99-qt-5-15-7-core20
     override-prime: |
         set -eux
-        for snap in "kde-frameworks-5-96-qt-5-15-5-core20"; do  # List all content-snaps you're using here
+        for snap in "kde-frameworks-5-99-qt-5-15-7-core20"; do  # List all content-snaps you're using here
             cd "/snap/$snap/current" && find . -type f,l -exec rm -f "$SNAPCRAFT_PRIME/{}" "$SNAPCRAFT_PRIME/usr/{}" \;
         done
         for CRUFT in bug lintian man; do
